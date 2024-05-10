@@ -2,6 +2,7 @@ package com.diary.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,6 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.diary.model.Diary;
 import com.diary.repo.DiaryRepo;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController
@@ -35,4 +40,12 @@ public class TestController {
          
         return "Form data received successfully";
     }
+    
+    @GetMapping("/entries{game}")
+    @ResponseBody
+    public Optional<Diary> getMethodName(@RequestParam String game) {
+    	
+        return diaryRepo.findById(game);
+    }
+    
 }
